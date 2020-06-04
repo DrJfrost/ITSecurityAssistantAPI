@@ -1,4 +1,4 @@
-# ITSecurityAssistant
+# it_security_assistant
 Project for Software Architecture and Pattern Design
 
 
