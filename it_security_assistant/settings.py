@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #localapps
-    'date_programming',
+    'meetings',
     'reports_managment',
     'users',
     
