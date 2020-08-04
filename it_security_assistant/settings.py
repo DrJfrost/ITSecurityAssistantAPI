@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
     #localapps
     'meetings',
-    'reports_managment',
+    'reports_management',
     'users',
     
 ]
