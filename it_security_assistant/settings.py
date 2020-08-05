@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'phonenumber_field',
 
+    #third-party apps
+    'rest_framework',
+    
     #localapps
     'meetings',
     'reports_management',
