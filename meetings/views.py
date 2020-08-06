@@ -81,11 +81,3 @@ class CustomersMeetingViewset(viewsets.ReadOnlyModelViewSet):
         if self.request.method in SAFE_METHODS:
             return MeetingInfoSerializer
         return MeetingSerializer
-
-
-<<<<<<< HEAD
-# Create your views here.
-||||||| 14487b7
-# Create your views here.
-=======
->>>>>>> master
