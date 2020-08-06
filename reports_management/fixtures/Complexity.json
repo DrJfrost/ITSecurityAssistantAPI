@@ -1,0 +1,24 @@
+[
+    {
+      "model": "reports_management.Complexity",
+      "pk": 1,
+      "fields": {
+        "name": "Low"
+      }
+    },
+    {
+      "model": "reports_management.Complexity",
+      "pk": 2,
+      "fields": {
+        "name": "Medium"
+      }
+    },
+    {
+        "model": "reports_management.Complexity",
+        "pk": 3,
+        "fields": {
+          "name": "High"
+        }
+    }
+
+]

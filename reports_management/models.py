@@ -19,9 +19,9 @@ class System(models.Model):
     description = models.TextField(verbose_name = "Description of the System")
 
     #Foreign Keys
-    OS = models.ForeignKey(OperatingSystem, on_delete=models.PROTECT)
-    system_type = models.ForeignKey (SystemType, on_delete=models.PROTECT)
-    customer = models.ForeignKey (User, on_delete=models.PROTECT) 
+    OS = models.ForeignKey(OperatingSystem, on_delete=models.PROTECT, verbose_name='Foreing key of Operating System table')
+    system_type = models.ForeignKey (SystemType, on_delete=models.PROTECT, verbose_name='Foreign key of SystemType table')
+    customer = models.ForeignKey (User, on_delete=models.PROTECT,verbose_name='Foreign key of User-Customer table') 
 
 class Complexity(models.Model):
     name = models.CharField(max_length=25, verbose_name="Is the level of complexity that have an user")
@@ -33,20 +33,20 @@ class AttackType(models.Model):
     risk = models.PositiveIntegerField(verbose_name="Is the risk level that has an user")
 
     #Foreign keys
-    complexity = models.ForeignKey(Complexity, on_delete=models.PROTECT)
+    complexity = models.ForeignKey(Complexity, on_delete=models.PROTECT, verbose_name='Foreign key of Complexity')
 
 class Report(models.Model):
     
     price = models.FloatField(verbose_name = "The price that you put on a report")
     date = models.DateTimeField(verbose_name = "The date that you did a report")
-    diagnostc = models.TextField(verbose_name = "The final diagnostic that an expert does for aproblem")
+    diagnostic = models.TextField(verbose_name = "The final diagnostic that an expert does for aproblem")
     solution = models.TextField(verbose_name = "The solution that an expert does for a problem")
     cve_codes = models.TextField(verbose_name = "Is a code for identify a problem in cibersecurity")
 
     #Foreign Keys 
-    system = models.ForeignKey(System, on_delete=models.PROTECT)
-    meeting = models.ForeignKey(Meeting, on_delete=models.PROTECT)
-    state = models.ForeignKey(ReportState, on_delete=models.PROTECT)
-    auditor = models.ForeignKey(User, related_name='reports',on_delete=models.PROTECT)
-    analyst = models.ForeignKey(User, related_name='analysis',on_delete=models.PROTECT)
-    attacks = models.ForeignKey(AttackType, on_delete=models.PROTECT)
+    system = models.ForeignKey(System, on_delete=models.PROTECT, verbose_name='Foreign key of System Table')
+    meeting = models.ForeignKey(Meeting, on_delete=models.PROTECT, verbose_name='Foreign key of Meeting Table')
+    state = models.ForeignKey(ReportState, on_delete=models.PROTECT, verbose_name='Foreign key of State Table')
+    auditor = models.ForeignKey(User, related_name='reports',on_delete=models.PROTECT, verbose_name='Foreign key of User-auditor Table')
+    analyst = models.ForeignKey(User, related_name='analysis',on_delete=models.PROTECT, verbose_name='Foreign key of User-analyst Table')
+    attacks = models.ForeignKey(AttackType, on_delete=models.PROTECT, verbose_name='Foreign key of Attacks Table')

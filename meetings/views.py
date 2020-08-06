@@ -83,3 +83,9 @@ class CustomersMeetingViewset(viewsets.ReadOnlyModelViewSet):
         return MeetingSerializer
 
 
+<<<<<<< HEAD
+# Create your views here.
+||||||| 14487b7
+# Create your views here.
+=======
+>>>>>>> master
