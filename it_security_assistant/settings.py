@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'phonenumber_field',
 
+    #third-party apps
+    'rest_framework',
+    
     #localapps
     'meetings',
     'reports_management',
@@ -130,5 +133,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# rest framework authentication classes
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+} 
+
 # User class
 AUTH_USER_MODEL = 'users.User'
+
+
+# media files (Profile Images, Headquarter Images)
+
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
