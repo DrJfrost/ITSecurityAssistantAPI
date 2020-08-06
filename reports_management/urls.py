@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework_nested import routers
 from reports_management.views import SystemViewSet, ReportViewSet, OperatingSystemViewSet, ComplexityViewSet,AttackTypeViewSet, SystemTypeViewSet,ReportStateViewSet
-from user.urls import router as routerReportUser
+from users.urls import router as routerReportUser
 router = routers.SimpleRouter()
 
 router.register(r"Complexities",ComplexityViewSet)

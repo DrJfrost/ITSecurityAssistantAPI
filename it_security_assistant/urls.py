@@ -22,6 +22,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('reports_management.urls')),
     path('', include('users.urls')),
     path('', include('meetings.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
