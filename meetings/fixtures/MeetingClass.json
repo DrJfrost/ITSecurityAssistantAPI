@@ -1,0 +1,18 @@
+[
+    {
+        "model": "meetings.MeetingClass",
+        "pk": "1",
+        "fields":{
+            "name":"Online"
+        }
+    },
+
+    {
+        "model": "meetings.MeetingClass",
+        "pk": "2",
+        "fields":{
+            "name":"Face-To-Face"
+        }
+    }
+    
+]

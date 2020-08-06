@@ -9,7 +9,7 @@ class Identification(models.Model):
 
 
 class User(AbstractUser):
-    image = models.ImageField(verbose_name="image of user")
+    image = models.ImageField(upload_to="userProfile/", verbose_name="image of user")
     phone = PhoneNumberField(verbose_name="phone of user")
 
     #Foreign Keys

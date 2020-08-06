@@ -25,6 +25,19 @@ class MeetingSerializer(serializers.ModelSerializer):
         model=Meeting
         fields = ['id', 'price', 'date', 'description', 'customer', 'auditor', 'meeting_type', 'state', 'meeting_class']
 
+    def validate_customer(self, value):
+        
+        if value.is_staff or value.is_superuser:
+            raise serializers.ValidationError("The user is not a customer")
+        return value
+
+    def validate_auditor(self, value):
+        
+        if value.is_staff and not value.is_superuser and not value.staff_profile.position.name=="Auditor":
+            raise serializers.ValidationError("The user is not an auditor")
+        elif not value.is_staff:
+            raise serializers.ValidationError("The user is not an auditor") 
+        return value
 class MeetingInfoSerializer(serializers.ModelSerializer):
 
     meeting_class = MeetingClassSerializer()
