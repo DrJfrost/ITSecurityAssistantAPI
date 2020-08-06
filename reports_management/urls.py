@@ -16,9 +16,8 @@ auditor_router = routers.NestedSimpleRouter(routerUsers, r'Staff', lookup='analy
 auditor_router.register(r'Report',AuditorsReportViewSet, base_name='analyst-reports')
 
 
-
 urlpatterns = [
-    path('api/', include (router.urls),
-    path('api/', include (auditor_router.urls),
-    path('api/', include (analyst_router.urls))
+    path('api/', include (router.urls)),
+    path('api/', include (auditor_router.urls)),
+    path('api/', include (analyst_router.urls)),
 ]
