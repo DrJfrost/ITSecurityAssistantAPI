@@ -93,7 +93,7 @@ class ComplexitySerializer(serializers.ModelSerializer):
 
 #AttackType serializer
 class AttackTypeNestedSerializer(serializers.ModelSerializer):
-    complexity = ComplexitySerializer(read_only=True)
+    complexity = ComplexitySerializer()
     class Meta:
         model = AttackType
         fields = ['id', 'name', 'description', 'risk', 'complexity']

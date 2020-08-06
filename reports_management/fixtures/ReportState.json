@@ -1,0 +1,38 @@
+[
+    {
+      "model": "reports_management.ReportState",
+      "pk": 1,
+      "fields": {
+        "name": "Pending Payment"
+      }
+    },
+    {
+      "model": "reports_management.ReportState",
+      "pk": 2,
+      "fields": {
+        "name": "Payment Completed"
+      }
+    },
+    {
+        "model": "reports_management.ReportState",
+        "pk": 3,
+        "fields": {
+          "name": "Processing"
+        }
+    },
+    {
+        "model": "reports_management.ReportState",
+        "pk": 4,
+        "fields": {
+          "name": "Cancelled"
+        }
+    },
+    {
+        "model": "reports_management.ReportState",
+        "pk": 5,
+        "fields": {
+          "name": "Completed"
+        }
+    }
+
+]

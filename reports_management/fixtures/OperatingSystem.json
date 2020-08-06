@@ -1,0 +1,45 @@
+[
+    {
+      "model": "reports_management.OperatingSystem",
+      "pk": 1,
+      "fields": {
+        "name": "Windows"
+      }
+    },
+    {
+      "model": "reports_management.OperatingSystem",
+      "pk": 2,
+      "fields": {
+        "name": "Linux"
+      }
+    },
+    {
+        "model": "reports_management.OperatingSystem",
+        "pk": 3,
+        "fields": {
+          "name": "Android OS"
+        }
+    },
+    {
+        "model": "reports_management.OperatingSystem",
+        "pk": 4,
+        "fields": {
+          "name": "IOS"
+        }
+    },
+    {
+        "model": "reports_management.OperatingSystem",
+        "pk": 5,
+        "fields": {
+          "name": "OSX"
+        }
+    },
+    {
+        "model": "reports_management.OperatingSystem",
+        "pk": 6,
+        "fields": {
+          "name": "Arduino"
+        }
+    }
+
+]
