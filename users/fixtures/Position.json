@@ -1,0 +1,26 @@
+[
+    {
+        "model": "users.Position",
+        "pk": "1",
+        "fields":{
+            "name":"SuperUser"
+        }
+    },
+
+    {
+        "model": "users.Position",
+        "pk": "2",
+        "fields":{
+            "name":"Analyst"
+        }
+    },
+
+    {
+        "model": "users.Position",
+        "pk": "3",
+        "fields":{
+            "name":"Auditor"
+        }
+    }
+    
+]

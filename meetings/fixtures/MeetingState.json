@@ -1,0 +1,50 @@
+[
+    {
+        "model": "meetings.MeetingState",
+        "pk": "1",
+        "fields":{
+            "name":"Pending Payment"
+        }
+    },
+
+    {
+        "model": "meetings.MeetingState",
+        "pk": "2",
+        "fields":{
+            "name":"Payment Completed"
+        }
+    },
+
+    {
+        "model": "meetings.MeetingState",
+        "pk": "3",
+        "fields":{
+            "name":"Programmed"
+        }
+    },
+
+    {
+        "model": "meetings.MeetingState",
+        "pk": "4",
+        "fields":{
+            "name":"In Progress"
+        }
+    },
+
+    {
+        "model": "meetings.MeetingState",
+        "pk": "5",
+        "fields":{
+            "name":"Finished"
+        }
+    },
+
+    {
+        "model": "meetings.MeetingState",
+        "pk": "6",
+        "fields":{
+            "name":"Cancelled"
+        }
+    }
+    
+]

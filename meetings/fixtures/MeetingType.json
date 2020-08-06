@@ -1,0 +1,18 @@
+[
+    {
+        "model": "meetings.MeetingType",
+        "pk": "1",
+        "fields":{
+            "name":"General"
+        }
+    },
+
+    {
+        "model": "meetings.MeetingType",
+        "pk": "2",
+        "fields":{
+            "name":"Custom"
+        }
+    }
+    
+]
