@@ -45,7 +45,7 @@ class Report(models.Model):
 
     #Foreign Keys 
     system = models.ForeignKey(System, on_delete=models.PROTECT, verbose_name='Foreign key of System Table')
-    meeting = models.ForeignKey(Meeting, on_delete=models.PROTECT, verbose_name='Foreign key of Meeting Table')
+    meeting = models.ForeignKey(Meeting, on_delete=models.PROTECT, verbose_name='Foreign key of Meeting Table', related_name='report')
     state = models.ForeignKey(ReportState, on_delete=models.PROTECT, verbose_name='Foreign key of State Table')
     auditor = models.ForeignKey(User, related_name='reports',on_delete=models.PROTECT, verbose_name='Foreign key of User-auditor Table')
     analyst = models.ForeignKey(User, related_name='analysis',on_delete=models.PROTECT, verbose_name='Foreign key of User-analyst Table')

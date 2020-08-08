@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework_nested import routers
-from reports_management.views import SystemViewSet, ReportViewSet, OperatingSystemViewSet, ComplexityViewSet,AttackTypeViewSet, SystemTypeViewSet,ReportStateViewSet, AuditorsReportViewSet, AnalystReportViewSet, ReportAttackTypeViewSet, CustomersSystemViewset
+from reports_management.views import ComplexityViewSet, SystemTypeViewSet, OperatingSystemViewSet, AttackTypeViewSet, ReportStateViewSet, AuditorsReportViewSet, AnalystReportViewSet, CustomersSystemViewset
 from users.urls import router as routerReportUser
 
 router = routers.SimpleRouter()
@@ -15,12 +15,8 @@ router.register(r"OperatingSystems", OperatingSystemViewSet)
 auditor_router = routers.NestedSimpleRouter(routerReportUser, r'Auditors', lookup='auditor')
 auditor_router.register(r'Reports',AuditorsReportViewSet, basename='auditor-reports')
 
-
-
 analyst_router = routers.NestedSimpleRouter(routerReportUser, r'Analysts', lookup='analyst')
 analyst_router.register(r'Reports',AnalystReportViewSet, basename = 'analyst-reports')
-
-
 
 customer_router = routers.NestedSimpleRouter(routerReportUser, r'Customers', lookup='customer')
 customer_router.register(r'Systems', CustomersSystemViewset, basename='customers-system')

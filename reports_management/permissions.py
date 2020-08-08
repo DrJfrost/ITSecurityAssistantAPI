@@ -38,8 +38,8 @@ class IsSystemCustomer(BasePermission):
             has_permission = True
         return has_permission
 
-class CheckCustomer(BasePermission):
-    message = "Customer on meeting is not the same customer in data"
+class CheckMeetingInfo(BasePermission):
+    message = "meeting auditor is not the same as the auditor in request data or meeting has not state 'finished'."
 
     def has_permission(self, request, view):
         has_permission = False
@@ -48,7 +48,7 @@ class CheckCustomer(BasePermission):
         meeting = Meeting.objects.get(pk = meeting_id)#Se obtiene objeto Meeting usando el pk
         auditor_id= meeting.auditor.id#se saca el id del auditor del obejto meeting
 
-        if auditor_id == request.data["auditor"]:
+        if auditor_id == request.data["auditor"] and meeting.state.name=="Finished":
             has_permission = True
         else:
             has_permission = False

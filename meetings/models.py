@@ -21,7 +21,7 @@ class Meeting(models.Model):
 
     #Foreign Keys
     customer = models.ForeignKey(User, related_name="meetings", on_delete=models.PROTECT, verbose_name="Id for user customer")
-    auditor = models.ForeignKey(User, related_name="audits", on_delete=models.PROTECT, verbose_name="Id for user auditor")
+    auditor = models.ForeignKey(User, related_name="audits", on_delete=models.PROTECT, null=True, verbose_name="Id for user auditor")
     meeting_type = models.ForeignKey(MeetingType, on_delete=models.PROTECT, verbose_name="Id for type of meeting")
     state = models.ForeignKey(MeetingState, on_delete=models.PROTECT, default=1, verbose_name="ID for state of meeting")
     meeting_class = models.ForeignKey(MeetingClass, on_delete=models.PROTECT, verbose_name="Id for class of meeting")
