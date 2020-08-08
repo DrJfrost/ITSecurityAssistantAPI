@@ -49,4 +49,4 @@ class Report(models.Model):
     state = models.ForeignKey(ReportState, on_delete=models.PROTECT, verbose_name='Foreign key of State Table')
     auditor = models.ForeignKey(User, related_name='reports',on_delete=models.PROTECT, verbose_name='Foreign key of User-auditor Table')
     analyst = models.ForeignKey(User, related_name='analysis',on_delete=models.PROTECT, verbose_name='Foreign key of User-analyst Table')
-    attacks = models.ForeignKey(AttackType, on_delete=models.PROTECT, verbose_name='Foreign key of Attacks Table')
+    attacks = models.ManyToManyField(AttackType, verbose_name='Foreign key of many to many relation with Attacks Table')
