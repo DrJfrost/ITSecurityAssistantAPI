@@ -177,18 +177,15 @@ class AttackTypeViewSet(viewsets.ModelViewSet):#que se adue~no del reporte is re
         return AttackTypeSerializer
 
 class CustomersSystemViewset(viewsets.ModelViewSet):
-    print("entre a CustomerSystemViewset")
 
     permission_classes = []
     
     def get_permissions(self):
-        print("entre a los permisos")
         if self.action == 'list':
             permission_classes = [(IsAuthenticated & IsCustomer & IsCustomerOwner) | IsSuperUser | IsAnalyst | IsAuditor]
         elif self.action == 'retrieve':
             permission_classes = [(IsAuthenticated & IsCustomer & IsSystemCustomer & IsCustomerOwner) | IsSuperUser]
         elif self.action == 'create':
-            print("entre a create")
             permission_classes = [(IsAuthenticated & IsCustomer & IsCustomerOwner) | IsSuperUser]
         elif self.action == 'update' or self.action == 'partial_update':
             permission_classes = [DenyPermission]#opcional

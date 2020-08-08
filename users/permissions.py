@@ -19,7 +19,6 @@ class IsAnalyst(BasePermission):
     message = 'User is not an analyst'
 
     def has_permission(self, request, view):
-        print ("Entre a los permisos de IsAnalyst")
         has_permission = False
         user = request.user
         if user.is_staff and user.staff_profile.position.name == 'Analyst':

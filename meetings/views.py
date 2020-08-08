@@ -27,7 +27,6 @@ class MeetingTypeViewset(viewsets.ReadOnlyModelViewSet):
     permission_classes = [AllowAny]
 
 class AuditorsMeetingViewset(viewsets.ModelViewSet):
-    print("entre a Auditors Meeting")
     def get_permissions(self):
 
         """
