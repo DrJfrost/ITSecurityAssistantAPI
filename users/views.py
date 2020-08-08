@@ -9,7 +9,7 @@ from users.serializers import StaffUserNestedSerializer, CustomerUserNestedSeria
 
 class CustomerUserViewset(viewsets.ModelViewSet):
 
-    queryset = User.objects.all()
+    queryset = User.objects.filter(is_superuser=False, is_staff=False)
 
     def get_permissions(self):
 
@@ -35,7 +35,7 @@ class CustomerUserViewset(viewsets.ModelViewSet):
 
 class StaffUserViewset(viewsets.ModelViewSet):
 
-    queryset = User.objects.all()
+    queryset = User.objects.filter(is_superuser=False, is_staff=True)
     serializer_class = StaffUserNestedSerializer
 
     def get_permissions(self):
