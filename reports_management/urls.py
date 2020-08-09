@@ -13,10 +13,10 @@ router.register(r"OperatingSystems", OperatingSystemViewSet)
 
 
 auditor_router = routers.NestedSimpleRouter(routerReportUser, r'Auditors', lookup='auditor')
-auditor_router.register(r'Reports',AuditorsReportViewSet, basename='auditor-reports')
+auditor_router.register(r'Reports', AuditorsReportViewSet, basename='auditor-reports')
 
 analyst_router = routers.NestedSimpleRouter(routerReportUser, r'Analysts', lookup='analyst')
-analyst_router.register(r'Reports',AnalystReportViewSet, basename = 'analyst-reports')
+analyst_router.register(r'Reports', AnalystReportViewSet, basename='analyst-reports')
 
 customer_router = routers.NestedSimpleRouter(routerReportUser, r'Customers', lookup='customer')
 customer_router.register(r'Systems', CustomersSystemViewset, basename='customers-system')

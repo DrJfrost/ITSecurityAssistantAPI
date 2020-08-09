@@ -39,10 +39,11 @@ class IsCustomerOwner(BasePermission):
         if not request.user.is_staff and not request.user.is_superuser:
             if request.user.id == (int)(view.kwargs["customer_pk"]):
                 has_permission = True
-                if view.action == 'create' and not view.kwargs["customer_pk"] == request.data["customer"]:
+                if view.action == 'create' and "customer" in request.data and (int)(view.kwargs["customer_pk"]) != request.data["customer"]:                 
                     has_permission = False
-                    self.message = "the meeting could not be created because the customer sent in URL does not match the one sent in data."
-                elif view.action == 'create' and "auditor" in request.data:
+                    self.message = "the meeting could not be created because the customer sent in URL does not match the one sent in data."                
+                if view.action == 'create' and "auditor" in request.data:
+                    has_permission = False
                     self.message = "customers can not define the 'auditor' that will take the meeting"
             else:
                 has_permission = False

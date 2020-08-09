@@ -9,7 +9,7 @@ router = routers.SimpleRouter()
 router.register(r"MeetingClasses", MeetingClassViewset)
 router.register(r"MeetingTypes", MeetingTypeViewset)
 router.register(r"MeetingStates", MeetingStateViewset)
-router.register(r"Pendingmeetings", PendingMeetingsViewset)
+router.register(r"PendingMeetings", PendingMeetingsViewset)
 
 
 auditor_router = routers.NestedSimpleRouter(routerUsers, r'Auditors', lookup='auditor')

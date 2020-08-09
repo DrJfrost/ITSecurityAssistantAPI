@@ -91,7 +91,7 @@ class IsAnalystOwner(BasePermission):
         if request.user.is_staff:
             if request.user.id == (int)(view.kwargs["analyst_pk"]):
                 has_permission = True
-                if view.action == "create" and not request.data["analyst"] == request.user.id:
+                if view.action == "create" and "analyst" in request.data and request.data["analyst"] != request.user.id:
                     has_permission = False
                     self.message = "Analyst sent in data is not the same analyst on url"
             elif request.user.is_superuser:
@@ -112,7 +112,7 @@ class IsCustomerOwner(BasePermission):
         if not request.user.is_staff:
             if request.user.id == (int)(view.kwargs["customer_pk"]):
                 has_permission = True
-                if view.action == "create" and not request.data["customer"] == request.user.id:
+                if view.action == "create" and "customer" in request.data and not request.data["customer"] == request.user.id:
                     has_permission = False
                     self.message = "Customer sent in data is not the same customer on url"
             elif request.user.is_superuser:

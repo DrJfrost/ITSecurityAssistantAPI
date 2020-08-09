@@ -112,28 +112,3 @@ class CustomersMeetingViewset(viewsets.ModelViewSet):
         if self.request.method in SAFE_METHODS:
             return MeetingInfoSerializer
         return MeetingSerializer
-
-
-class CustumerSystemViewset(viewsets.ModelViewSet):
-    def get_permissions(self):
-
-        """
-        Instantiates and returns the list of permissions that this view requires.
-        """
-        permission_classes = []
-
-        if self.action == 'list':
-            permission_classes = [IsAuthenticated, IsCustomer, IsCustomerOwner]
-        elif self.action == 'retrieve':
-            permission_classes = [IsAuthenticated, IsCustomer, IsMeetingCustomer, IsCustomerOwner]
-
-        return [permission() for permission in permission_classes]
-
-    def get_queryset(self):
-        queryset = Meeting.objects.filter(customer=self.kwargs['customer_pk'])
-        return queryset
-
-    def get_serializer_class(self):
-        if self.request.method in SAFE_METHODS:
-            return MeetingInfoSerializer
-        return MeetingSerializer

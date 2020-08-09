@@ -38,7 +38,7 @@ class AttackType(models.Model):
 class Report(models.Model):
     
     price = models.FloatField(verbose_name = "The price that you put on a report")
-    date = models.DateTimeField(verbose_name = "The date that you did a report")
+    date = models.DateTimeField(verbose_name = "The date that you did a report", auto_now_add=True)
     diagnostic = models.TextField(verbose_name = "The final diagnostic that an expert does for aproblem")
     solution = models.TextField(verbose_name = "The solution that an expert does for a problem")
     cve_codes = models.TextField(verbose_name = "Is a code for identify a problem in cibersecurity")

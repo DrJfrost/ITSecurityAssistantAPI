@@ -31,11 +31,11 @@ class MeetingSerializer(serializers.ModelSerializer):
 
         instance.price = validated_data.get("price", instance.price)
         instance.date = validated_data.get("date", instance.date)
-        instance.description = validated_data.get("price", instance.description)
-        instance.auditor = validated_data.get("price", instance.auditor)
-        instance.meeting_type = validated_data.get("price", instance.meeting_type)
-        instance.state = validated_data.get("price", instance.state)
-        instance.meeting_class = validated_data.get("price", instance.meeting_class)
+        instance.description = validated_data.get("description", instance.description)
+        instance.auditor = validated_data.get("auditor", instance.auditor)
+        instance.meeting_type = validated_data.get("meeting_type", instance.meeting_type)
+        instance.state = validated_data.get("state", instance.state)
+        instance.meeting_class = validated_data.get("meeting_class", instance.meeting_class)
 
         instance.save()
         return instance

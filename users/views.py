@@ -3,7 +3,7 @@ from users.models import Identification, StaffProfile, User, Position
 from rest_framework import viewsets
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, AllowAny
 from users.permissions import IsOwner, DenyPermission, IsSuperUser, IsAdminUser
-from users.serializers import StaffUserNestedSerializer, CustomerUserNestedSerializer
+from users.serializers import StaffUserNestedSerializer, CustomerUserNestedSerializer, PositionSelializer
 
 # Views.
 
@@ -25,7 +25,7 @@ class CustomerUserViewset(viewsets.ModelViewSet):
         elif self.action == 'create':
             permission_classes = [AllowAny]
         elif self.action == 'update' or self.action == 'partial_update':
-            permission_classes = [IsSuperUser]
+            permission_classes = [IsAuthenticated, IsSuperUser]
         elif self.action == 'destroy':
             permission_classes = [DenyPermission]
 
@@ -57,3 +57,8 @@ class StaffUserViewset(viewsets.ModelViewSet):
             permission_classes = [DenyPermission]
 
         return [permission() for permission in permission_classes]
+
+class PositionViewset(viewsets.ReadOnlyModelViewSet):
+
+    queryset = Position.objects.all()
+    serializer_class = PositionSelializer

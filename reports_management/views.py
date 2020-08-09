@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework import viewsets, generics
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, AllowAny
 from meetings.permissions import IsAuditorOwner
-from users.permissions import IsSuperUser, IsAuditor, IsAnalyst, DenyPermission, IsAnalystOwner, IsCustomer, IsCustomerOwner
+from users.permissions import IsSuperUser, IsAuditor, IsAnalyst, DenyPermission, IsAnalystOwner, IsCustomer, IsCustomerOwner, IsAdminUser
 from reports_management.permissions import IsReportAnalyst, IsReportAuditor, IsSystemCustomer, CheckMeetingInfo
 from reports_management.serializers import SystemSerializer, SystemNestedSerializer, ReportSerializer, ReportNestedSerializer, AttackTypeSerializer, AttackTypeNestedSerializer, OperatingSystemSerializer, SystemTypeSerializer, ReportStateSerializer, ComplexitySerializer
 
@@ -88,7 +88,8 @@ class CustomerMeetingReportViewSet(viewsets.GenericViewSet, generics.RetrieveAPI
     serializer_class = ReportNestedSerializer
 
     def get_queryset(self):
-        queryset = Report.objects.filter(meeting=self.kwargs['meeting_pk'], meeting__customer=self.kwargs['customer_pk'], meeting__state="Finished")
+        queryset = Report.objects.filter(meeting=self.kwargs['meeting_pk'], meeting__customer=self.kwargs['customer_pk'])
+        print(queryset.query)
         return queryset
 
 class AnalystReportViewSet(viewsets.ModelViewSet):
@@ -107,7 +108,7 @@ class AnalystReportViewSet(viewsets.ModelViewSet):
             permission_classes = [(IsAuthenticated & IsAnalyst & IsReportAnalyst & IsAnalystOwner) | IsSuperUser]
 
         elif self.action == 'create':
-            permission_classes = [(IsAuthenticated & IsAnalyst & CheckMeetingInfo & IsAnalystOwner) | IsSuperUser]
+            permission_classes = [IsAuthenticated, IsAnalyst, CheckMeetingInfo, IsAnalystOwner]
         
         elif self.action == 'update' or self.action == 'partial_update':
             permission_classes = [DenyPermission]
@@ -187,11 +188,11 @@ class CustomersSystemViewset(viewsets.ModelViewSet):
     
     def get_permissions(self):
         if self.action == 'list':
-            permission_classes = [(IsAuthenticated & IsCustomer & IsCustomerOwner) | IsSuperUser | IsAnalyst | IsAuditor]
+            permission_classes = [(IsAuthenticated & IsCustomer & IsCustomerOwner) | IsAdminUser]
         elif self.action == 'retrieve':
-            permission_classes = [(IsAuthenticated & IsCustomer & IsSystemCustomer & IsCustomerOwner) | IsSuperUser]
+            permission_classes = [(IsAuthenticated & IsCustomer & IsSystemCustomer & IsCustomerOwner) | IsAdminUser]
         elif self.action == 'create':
-            permission_classes = [(IsAuthenticated & IsCustomer & IsCustomerOwner) | IsSuperUser]
+            permission_classes = [(IsAuthenticated & IsCustomer & IsCustomerOwner) | IsAdminUser]
         elif self.action == 'update' or self.action == 'partial_update':
             permission_classes = [DenyPermission]#opcional
         elif self.action == 'destroy':
