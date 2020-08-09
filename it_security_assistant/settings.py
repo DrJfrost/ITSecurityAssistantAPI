@@ -91,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'it_security_assistant_DB',
         'USER': 'it_admin',
-        'PASSWORD': 'Illuminati2020*',
+        'PASSWORD': os.environ["DB_PASSWORD"],
         'HOST': 'it-security.cvanynsd2ose.us-east-1.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
@@ -154,8 +154,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # S3 storage configuration
-AWS_ACCESS_KEY_ID = 'AKIAYZOTJAY76UQ72W2D'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
+AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
 AWS_STORAGE_BUCKET_NAME = 'it-security-assistant-s3'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
