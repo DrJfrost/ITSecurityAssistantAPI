@@ -82,7 +82,6 @@ six==1.11.0
 sqlparse==0.3.1
 termcolor==1.1.0
 texttable==1.6.2
-toml==0.10.1
 ubuntu-advantage-tools==20.3
 ubuntu-drivers-common==0.0.0
 ufw==0.36
