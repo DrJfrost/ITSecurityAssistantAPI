@@ -87,7 +87,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'it_security_assistant_DB',
-        'USER': 'root',
+        'USER': 'it_admin',
         'PASSWORD': 'Illuminati2020*',
         'HOST': 'it-security.cvanynsd2ose.us-east-1.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
