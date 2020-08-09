@@ -25,7 +25,7 @@ SECRET_KEY = '3gp5$)v@v4=8xrv@pk@h&)3$4ma^2_g%(&o-fdmk&@08+^&v3f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', 'itsecurityassistantapi-dev.us-east-1.elasticbeanstalk.com']
 
 
 # Application definition
