@@ -15,7 +15,6 @@ chardet==3.0.4
 Click==7.0
 colorama==0.4.3
 cryptography==2.8
-dbus-python==1.2.16
 distro==1.4.0
 Django==3.0.7
 django-phonenumber-field==4.0.0
