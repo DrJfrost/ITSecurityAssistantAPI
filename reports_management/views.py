@@ -1,18 +1,17 @@
 from reports_management.models import System, Report, SystemType, ReportState, AttackType, Complexity, OperatingSystem
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, AllowAny
-from users.permissions import IsSuperUser
 from meetings.permissions import IsAuditorOwner
-from users.permissions import IsAuditor, IsAnalyst, DenyPermission, IsAnalystOwner, IsCustomer, IsCustomerOwner
-from reports_management.permissions import IsReportAnalyst, IsReportAuditor, IsSystemCustomer, CheckCustomer
+from users.permissions import IsSuperUser, IsAuditor, IsAnalyst, DenyPermission, IsAnalystOwner, IsCustomer, IsCustomerOwner, IsAdminUser
+from reports_management.permissions import IsReportAnalyst, IsReportAuditor, IsSystemCustomer, CheckMeetingInfo
 from reports_management.serializers import SystemSerializer, SystemNestedSerializer, ReportSerializer, ReportNestedSerializer, AttackTypeSerializer, AttackTypeNestedSerializer, OperatingSystemSerializer, SystemTypeSerializer, ReportStateSerializer, ComplexitySerializer
 
 
 # Create your views here.
 class SystemViewSet(viewsets.ModelViewSet):
     queryset=System.objects.all()
-#for gets
+
     def get_serializer_class(self):
         if self.request.method in SAFE_METHODS:
             return SystemNestedSerializer
@@ -20,7 +19,7 @@ class SystemViewSet(viewsets.ModelViewSet):
 
 class ReportViewSet(viewsets.ModelViewSet):
     queryset=Report.objects.all()
-#for gets
+
     def get_serializer_class(self):
         if self.request.method in SAFE_METHODS:
             return ReportNestedSerializer
@@ -45,7 +44,7 @@ class ComplexityViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ComplexitySerializer
     queryset=Complexity.objects.all()
     
-#
+
 class AuditorsReportViewSet(viewsets.ModelViewSet):
     
     def get_permissions(self):
@@ -76,7 +75,6 @@ class AuditorsReportViewSet(viewsets.ModelViewSet):
         print (queryset.query)
         return queryset
 
-    #for gets
     def get_serializer_class(self):
         if self.request.method in SAFE_METHODS:
             return ReportNestedSerializer
@@ -84,34 +82,45 @@ class AuditorsReportViewSet(viewsets.ModelViewSet):
 
 
 
+class CustomerMeetingReportViewSet(viewsets.GenericViewSet, generics.RetrieveAPIView):
+    
+    permission_classes = [IsAuthenticated, IsCustomer, IsCustomerOwner]
+    serializer_class = ReportNestedSerializer
+
+    def get_queryset(self):
+        queryset = Report.objects.filter(meeting=self.kwargs['meeting_pk'], meeting__customer=self.kwargs['customer_pk'])
+        print(queryset.query)
+        return queryset
+
 class AnalystReportViewSet(viewsets.ModelViewSet):
     
     def get_permissions(self):
-            permission_classes = []
-            """
+        """
         Instantiates and returns the list of permissions that this view requires.
         """
-            if self.action == 'list':
-                permission_classes = [(IsAuthenticated & IsAnalyst & IsAnalystOwner) | IsSuperUser]
 
-            elif self.action == 'retrieve':
-                permission_classes = [(IsAuthenticated & IsAnalyst & IsReportAnalyst & IsAnalystOwner) | IsSuperUser]
+        permission_classes = []
 
-            elif self.action == 'create':
-                permission_classes = [(IsAuthenticated & IsAnalyst & CheckCustomer & IsAnalystOwner) | IsSuperUser]
-            
-            elif self.action == 'update' or self.action == 'partial_update':
-                permission_classes = [DenyPermission]
+        if self.action == 'list':
+            permission_classes = [(IsAuthenticated & IsAnalyst & IsAnalystOwner) | IsSuperUser]
 
-            elif self.action == 'destroy':
-                permission_classes = [DenyPermission]
-            return [permission() for permission in permission_classes]
+        elif self.action == 'retrieve':
+            permission_classes = [(IsAuthenticated & IsAnalyst & IsReportAnalyst & IsAnalystOwner) | IsSuperUser]
+
+        elif self.action == 'create':
+            permission_classes = [IsAuthenticated, IsAnalyst, CheckMeetingInfo, IsAnalystOwner]
+        
+        elif self.action == 'update' or self.action == 'partial_update':
+            permission_classes = [DenyPermission]
+
+        elif self.action == 'destroy':
+            permission_classes = [DenyPermission]
+        return [permission() for permission in permission_classes]
 
     def  get_queryset(self):
         queryset=Report.objects.filter(analyst = self.kwargs['analyst_pk'])
         return queryset
 
-   #for gets
     def get_serializer_class(self):
         if self.request.method in SAFE_METHODS:
             return ReportNestedSerializer
@@ -122,6 +131,7 @@ class ReportAttackTypeViewSet(viewsets.ModelViewSet):
     
 
     def get_permissions(self):
+
         permission_classes = []
 
         if self.action == 'list':
@@ -139,7 +149,6 @@ class ReportAttackTypeViewSet(viewsets.ModelViewSet):
         queryset=Report.objects.filter(auditor = self.kwargs['report_pk'])
         return queryset
     
-    #for gets
     def get_serializer_class(self):
         if self.request.method in SAFE_METHODS:
             return ReportNestedSerializer
@@ -168,9 +177,6 @@ class AttackTypeViewSet(viewsets.ModelViewSet):#que se adue~no del reporte is re
 
         return [permission() for permission in permission_classes]
 
-    
-#for gets
-
     def get_serializer_class(self):
         if self.request.method  in SAFE_METHODS:
             return AttackTypeNestedSerializer
@@ -182,11 +188,11 @@ class CustomersSystemViewset(viewsets.ModelViewSet):
     
     def get_permissions(self):
         if self.action == 'list':
-            permission_classes = [(IsAuthenticated & IsCustomer & IsCustomerOwner) | IsSuperUser | IsAnalyst | IsAuditor]
+            permission_classes = [(IsAuthenticated & IsCustomer & IsCustomerOwner) | IsAdminUser]
         elif self.action == 'retrieve':
-            permission_classes = [(IsAuthenticated & IsCustomer & IsSystemCustomer & IsCustomerOwner) | IsSuperUser]
+            permission_classes = [(IsAuthenticated & IsCustomer & IsSystemCustomer & IsCustomerOwner) | IsAdminUser]
         elif self.action == 'create':
-            permission_classes = [(IsAuthenticated & IsCustomer & IsCustomerOwner) | IsSuperUser]
+            permission_classes = [(IsAuthenticated & IsCustomer & IsCustomerOwner) | IsAdminUser]
         elif self.action == 'update' or self.action == 'partial_update':
             permission_classes = [DenyPermission]#opcional
         elif self.action == 'destroy':

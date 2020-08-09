@@ -38,14 +38,14 @@ class AttackType(models.Model):
 class Report(models.Model):
     
     price = models.FloatField(verbose_name = "The price that you put on a report")
-    date = models.DateTimeField(verbose_name = "The date that you did a report")
+    date = models.DateTimeField(verbose_name = "The date that you did a report", auto_now_add=True)
     diagnostic = models.TextField(verbose_name = "The final diagnostic that an expert does for aproblem")
     solution = models.TextField(verbose_name = "The solution that an expert does for a problem")
     cve_codes = models.TextField(verbose_name = "Is a code for identify a problem in cibersecurity")
 
     #Foreign Keys 
     system = models.ForeignKey(System, on_delete=models.PROTECT, verbose_name='Foreign key of System Table')
-    meeting = models.ForeignKey(Meeting, on_delete=models.PROTECT, verbose_name='Foreign key of Meeting Table')
+    meeting = models.ForeignKey(Meeting, on_delete=models.PROTECT, verbose_name='Foreign key of Meeting Table', related_name='report')
     state = models.ForeignKey(ReportState, on_delete=models.PROTECT, verbose_name='Foreign key of State Table')
     auditor = models.ForeignKey(User, related_name='reports',on_delete=models.PROTECT, verbose_name='Foreign key of User-auditor Table')
     analyst = models.ForeignKey(User, related_name='analysis',on_delete=models.PROTECT, verbose_name='Foreign key of User-analyst Table')

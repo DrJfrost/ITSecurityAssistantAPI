@@ -9,6 +9,9 @@ class Identification(models.Model):
 
 
 class User(AbstractUser):
+    first_name = models.CharField("user's first name", max_length=30)
+    last_name = models.CharField("user's last name", max_length=150)
+    email = models.EmailField("user's email addresss")
     image = models.ImageField(upload_to="userProfile/", verbose_name="image of user")
     phone = PhoneNumberField(verbose_name="phone of user")
 

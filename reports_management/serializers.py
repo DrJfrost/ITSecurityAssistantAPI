@@ -103,6 +103,11 @@ class AttackTypeSerializer(serializers.ModelSerializer):
         model = AttackType
         fields = ['id', 'name', 'description', 'risk', 'complexity']
 
+    def validate_risk(self, value):
+        if value > 10:
+            raise serializers.ValidationError("Risk has to be in the range of 0 to 10")
+        return value
+
 #Report serializer
 class ReportNestedSerializer(serializers.ModelSerializer):
     system = SystemSerializer(read_only=True)
