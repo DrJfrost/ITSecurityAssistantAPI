@@ -56,7 +56,6 @@ pexpect==4.6.0
 phonenumbers==8.12.7
 Pillow==7.0.0
 protobuf==3.6.1
-pycairo==1.16.2
 pycups==1.9.73
 PyJWT==1.7.1
 pylint==2.5.3
