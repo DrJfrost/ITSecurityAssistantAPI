@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     #third-party apps
     'phonenumber_field',
     'rest_framework',
-    'storages'
-    'corsheaders'
+    'storages',
+    'corsheaders',
     
     #localapps
     'meetings',
