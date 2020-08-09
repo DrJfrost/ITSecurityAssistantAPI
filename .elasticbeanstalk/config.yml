@@ -1,5 +1,5 @@
 branch-defaults:
-  customer-meeting-creation:
+  master:
     environment: ITSecurityAssistantAPI-dev
 environment-defaults:
   ITSecurityAssistantAPI-dev:
