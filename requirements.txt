@@ -28,7 +28,6 @@ dockerpty==0.4.1
 docopt==0.6.2
 docutils==0.15.2
 drf-nested-routers==0.91
-duplicity==0.8.12.0
 entrypoints==0.3
 fasteners==0.14.1
 future==0.16.0
