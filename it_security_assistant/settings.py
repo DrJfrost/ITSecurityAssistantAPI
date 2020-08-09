@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'it_security_assistant_DB',
         'USER': 'root',
         'PASSWORD': 'Illuminati2020*',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'HOST': 'it-security.cvanynsd2ose.us-east-1.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
