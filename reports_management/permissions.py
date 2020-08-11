@@ -49,7 +49,7 @@ class CheckMeetingInfo(BasePermission):
             meeting_id = request.data["meeting"]#Se obtiene el id del json que se envia en post
             meeting = Meeting.objects.get(pk=meeting_id)#Se obtiene objeto Meeting usando el pk
             auditor_id = meeting.auditor.id#se saca el id del auditor del obejto meeting
-            if "auditor" in request.data and auditor_id == request.data["auditor"]:
+            if "auditor" in request.data and auditor_id == (int)(request.data["auditor"]):
                 has_permission = True
             elif not "auditor" in request.data:
                 has_permission = True
