@@ -29,6 +29,3 @@ class StaffProfile(models.Model):
     #Foreign Keys
     position = models.ForeignKey(Position, on_delete=models.PROTECT, verbose_name="Position of user")
     user = models.OneToOneField(User, related_name="staff_profile", on_delete=models.PROTECT, verbose_name="id of user")
-
-
-

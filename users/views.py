@@ -3,7 +3,11 @@ from users.models import Identification, StaffProfile, User, Position
 from rest_framework import viewsets
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, AllowAny
 from users.permissions import IsOwner, DenyPermission, IsSuperUser, IsAdminUser
-from users.serializers import StaffUserNestedSerializer, CustomerUserNestedSerializer, PositionSelializer
+from users.serializers import StaffUserNestedSerializer, CustomerUserNestedSerializer, PositionSelializer, MyTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 # Views.
 

@@ -1,5 +1,22 @@
 from rest_framework import serializers
 from users.models import Identification, StaffProfile, User, Position
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        if not user.is_staff:
+            token['type'] = "Customer"
+        elif user.is_staff and not user.is_superuser:
+            token['type'] = user.staff_profile.position.name
+        elif user.is_staff and user.is_superuser:
+            token['type'] = "Super User"
+        # ...
+
+        return token
 
 class IdentificationSelializer(serializers.ModelSerializer):
 
