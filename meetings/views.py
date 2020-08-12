@@ -115,9 +115,9 @@ class CustomersMeetingViewset(viewsets.ModelViewSet):
         permission_classes = []
 
         if self.action == 'list':
-            permission_classes = [IsAuthenticated, IsCustomer, IsCustomerOwner]
+            permission_classes = [IsAuthenticated & (IsAdminUser | (IsCustomer & IsCustomerOwner))]
         elif self.action == 'retrieve':
-            permission_classes = [IsAuthenticated, IsCustomer, IsMeetingCustomer, IsCustomerOwner]
+            permission_classes = [IsAuthenticated & (IsAdminUser | (IsCustomer & IsMeetingCustomer & IsCustomerOwner))]
         elif self.action == 'create':
             permission_classes = [IsAuthenticated, IsCustomer, IsCustomerOwner]
         elif self.action == 'update' or self.action == 'partial_update':
