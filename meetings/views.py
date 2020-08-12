@@ -82,7 +82,7 @@ class PendingMeetingsViewset(viewsets.GenericViewSet, generics.RetrieveUpdateAPI
             return MeetingInfoSerializer
         return MeetingSerializer
 
-class PendingReportMeetingsViewset(viewsets.ReadOnlyModelViewSet):
+class PendingReportMeetingsViewset(viewsets.ModelViewSet):
     
     queryset = Meeting.objects.filter(state__name="In Progress")
 
@@ -96,6 +96,8 @@ class PendingReportMeetingsViewset(viewsets.ReadOnlyModelViewSet):
         if self.action == 'list':
             permission_classes = [IsAuthenticated, IsAnalyst]
         elif self.action == 'retrieve':
+            permission_classes = [IsAuthenticated, IsAnalyst]
+        elif self.action == 'update' or self.action == 'partial_update':
             permission_classes = [IsAuthenticated, IsAnalyst]
 
         return [permission() for permission in permission_classes]
