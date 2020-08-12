@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework_nested import routers
-from meetings.views import MeetingClassViewset, MeetingStateViewset, MeetingTypeViewset, AuditorsMeetingViewset, CustomersMeetingViewset, PendingMeetingsViewset
+from meetings.views import MeetingClassViewset, MeetingStateViewset, MeetingTypeViewset, AuditorsMeetingViewset, CustomersMeetingViewset, PendingMeetingsViewset, PendingReportMeetingsViewset
 from users.urls import router as routerUsers
 from reports_management.views import CustomerMeetingReportViewSet
 
@@ -10,6 +10,7 @@ router.register(r"MeetingClasses", MeetingClassViewset)
 router.register(r"MeetingTypes", MeetingTypeViewset)
 router.register(r"MeetingStates", MeetingStateViewset)
 router.register(r"PendingMeetings", PendingMeetingsViewset)
+router.register(r"PendingAnalisis", PendingReportMeetingsViewset)
 
 
 auditor_router = routers.NestedSimpleRouter(routerUsers, r'Auditors', lookup='auditor')

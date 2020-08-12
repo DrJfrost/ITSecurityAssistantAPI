@@ -2,7 +2,7 @@ from django.shortcuts import render
 from meetings.models import MeetingClass, MeetingState, MeetingType, Meeting
 from rest_framework import viewsets, generics, mixins
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, IsAdminUser, AllowAny
-from users.permissions import IsAuditor, DenyPermission, IsCustomer
+from users.permissions import IsAuditor, DenyPermission, IsCustomer, IsAnalyst
 from meetings.permissions import IsMeetingAuditor, IsMeetingCustomer, IsCustomerOwner, IsAuditorOwner, CheckAuditor
 from meetings.serializers import MeetingClassSerializer, MeetingStateSerializer, MeetingTypeSerializer, MeetingInfoSerializer, MeetingSerializer
 
@@ -74,6 +74,29 @@ class PendingMeetingsViewset(viewsets.GenericViewSet, generics.RetrieveUpdateAPI
             permission_classes = [IsAuthenticated, IsAuditor]
         elif self.action == 'update' or self.action == 'partial_update':
             permission_classes = [IsAuthenticated, IsAuditor, CheckAuditor]
+
+        return [permission() for permission in permission_classes]
+
+    def get_serializer_class(self):
+        if self.request.method in SAFE_METHODS:
+            return MeetingInfoSerializer
+        return MeetingSerializer
+
+class PendingReportMeetingsViewset(viewsets.ReadOnlyModelViewSet):
+    
+    queryset = Meeting.objects.filter(state__name="In Progress")
+
+    def get_permissions(self):
+
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        permission_classes = []
+
+        if self.action == 'list':
+            permission_classes = [IsAuthenticated, IsAnalyst]
+        elif self.action == 'retrieve':
+            permission_classes = [IsAuthenticated, IsAnalyst]
 
         return [permission() for permission in permission_classes]
 
