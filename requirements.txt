@@ -16,7 +16,7 @@ Click==7.0
 colorama==0.4.3
 cryptography==2.8
 distro==1.4.0
-Django==3.0.7
+Django==3.0.12
 django-cors-headers==3.4.0
 django-phonenumber-field==4.0.0
 django-storages==1.9.1
