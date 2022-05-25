@@ -57,7 +57,7 @@ pexpect==4.6.0
 phonenumbers==8.12.7
 Pillow==7.0.0
 protobuf==3.6.1
-PyJWT==1.7.1
+PyJWT==2.4.0
 pylint==2.5.3
 pylint-django==2.0.15
 pylint-plugin-utils==0.6
